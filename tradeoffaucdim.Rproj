@@ -1,0 +1,21 @@
+Version: 1.0
+ProjectId: 09e7f078-697e-47b8-be4f-780db1ac8373
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: pdfLaTeX
+
+AutoAppendNewline: Yes
+StripTrailingWhitespace: Yes
+
+BuildType: Package
+PackageUseDevtools: Yes
+PackageInstallArgs: --no-multiarch --with-keep.source -l "/Users/luis_/OneDrive - Universidade de Lisboa/Luís Garcez/00_packages/"

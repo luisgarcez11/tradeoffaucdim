@@ -1,0 +1,3 @@
+1. How bootstrap works. having a validation dataset to counter overfitting?
+2. Variable order selection
+3. global p-value not feasible because different AUC distributions in each dimensionality
