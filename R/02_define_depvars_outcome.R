@@ -12,10 +12,12 @@
 #' @export
 #'
 #' @examples
-#' define_indepvars(obj)
+#' define_indepvars(obj1)
 define_indepvars <- function(obj,
                              p_in = 0.50,
                              p_out = 0.60){
+
+  n_indeps <- NULL
 
   #run stepwise
   obj$stepwise_process <- fuzzySim::stepwise(data = obj$original_data,
@@ -36,8 +38,8 @@ define_indepvars <- function(obj,
 
   #add vars to bootstrap data
   obj$bootstrap_data <- obj$bootstrap_data %>%
-    filter(n_indeps <= obj$n_maximum_dim) %>%
-    mutate(indep_vars = purrr::map(.x = n_indeps,
+    dplyr::filter(n_indeps <= obj$n_maximum_dim) %>%
+    dplyr::mutate(indep_vars = purrr::map(.x = n_indeps,
                                      .f = ~obj$ordered_indep_vars[1:.x]))
 
   return(obj)

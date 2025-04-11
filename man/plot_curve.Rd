@@ -16,5 +16,5 @@ list
 Plot curve
 }
 \examples{
-plot_curve(obj)
+plot_curve(obj4)
 }

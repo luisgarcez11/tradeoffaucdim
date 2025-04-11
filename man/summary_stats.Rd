@@ -16,5 +16,5 @@ list
 Summary Stats
 }
 \examples{
-summary_stats(obj)
+summary_stats(obj3)
 }

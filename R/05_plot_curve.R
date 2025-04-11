@@ -6,66 +6,73 @@
 #' @export
 #'
 #' @examples
-#' plot_curve(obj)
+#' plot_curve(obj4)
 plot_curve <- function(obj){
+
+  n_indeps <- perf_m <- model <- auc <- perf_q025 <-
+    perf_q975 <- time_m <- time_q025 <-time_q975 <- value <- NULL
 
     #plot performance
     obj$plot_performance <- ggplot2::ggplot(data = obj$summary_stats )+
-      geom_line(aes( x = n_indeps, y = perf_m, colour = model ))+
-      geom_errorbar(aes( x = n_indeps, y = perf_m,
+      ggplot2::geom_line(ggplot2::aes( x = n_indeps, y = perf_m, colour = model ))+
+      ggplot2::geom_errorbar(ggplot2::aes( x = n_indeps, y = perf_m,
                          ymin = perf_q025, ymax= perf_q975,
                         colour = model),
                     width=.2, linetype = 1) +
-      xlab("Dimensionality") +
-      ylab(toupper(obj$perf_measure[1])) +
-      labs(caption = paste0("Variable order: ",paste0(obj$ordered_indep_vars,
+      ggplot2::xlab("Dimensionality") +
+      ggplot2::ylab(toupper(obj$perf_measure[1])) +
+      ggplot2::labs(caption = paste0("Variable order: ",paste0(obj$ordered_indep_vars,
                                            collapse = ", ")))+
-      theme_bw()
+      ggplot2::theme_bw()
 
     #add plot histogram
     obj$plot_performance_hist <- ggplot2::ggplot(
       data = obj$bootstrap_data %>%
-        dplyr::select(starts_with(obj$perf_measure), "n_indeps") %>%
-        tidyr::pivot_longer(cols = starts_with(obj$perf_measure[1]),
+        dplyr::select(dplyr::starts_with(obj$perf_measure), "n_indeps") %>%
+        tidyr::pivot_longer(cols = dplyr::starts_with(obj$perf_measure[1]),
                             names_sep = "_",
                             names_to = c("measure", "model"),
                             values_to = obj$perf_measure[1]) ,
-      mapping = aes(x = auc, fill = model)
+      mapping = ggplot2::aes(x = auc, fill = model)
     )+
-      geom_histogram() +
-      facet_wrap(~n_indeps, scales = "free") +
-      theme_bw()+
-      xlab(toupper(obj$perf_measure[1])) +
-      ylab("Count")
+      ggplot2::geom_histogram() +
+      ggplot2::facet_wrap(~n_indeps, scales = "free") +
+      ggplot2::theme_bw()+
+      ggplot2::xlab(toupper(obj$perf_measure[1])) +
+      ggplot2::ylab("Count")
 
     #plot time
     obj$plot_time <- ggplot2::ggplot(data = obj$summary_stats )+
-      geom_line(aes( x = n_indeps, y = time_m, colour = model ))+
-      geom_errorbar(aes( x = n_indeps, y = time_m,
-                         ymin = time_q025, ymax= time_q975,
-                         colour = model),
-                    width=.2, linetype = 1) +
-      xlab("Dimensionality") +
-      ylab("Time (in seconds)") +
-      labs(caption = paste0("Variable order: ",
-                            paste0(obj$ordered_indep_vars, collapse = ", ")))+
-      theme_bw()
+      ggplot2::geom_bar(ggplot2::aes( x = n_indeps, y = time_m, fill = model ),
+                        stat = "identity", position =
+                          ggplot2::position_dodge(0.9),
+                        alpha = 0.5)+
+      ggplot2::geom_errorbar(ggplot2::aes( x = n_indeps, y = time_m,
+                                           ymin = time_q025, ymax= time_q975,
+                                           colour = model),
+                             position =  ggplot2::position_dodge(0.9),
+                             width=.2, linetype = 1) +
+      ggplot2::xlab("Dimensionality") +
+      ggplot2::ylab("Time (in seconds)") +
+      ggplot2::labs(caption = paste0("Variable order: ",
+                                     paste0(obj$ordered_indep_vars, collapse = ", ")))+
+      ggplot2::theme_bw()
 
     #plot time histogram
     obj$plot_time_hist <- ggplot2::ggplot(
       data = obj$bootstrap_data %>%
-        dplyr::select(starts_with("time"), "n_indeps") %>%
-        tidyr::pivot_longer(cols = starts_with("time"),
+        dplyr::select(dplyr::starts_with("time"), "n_indeps") %>%
+        tidyr::pivot_longer(cols = dplyr::starts_with("time"),
                             names_to = c("measure", "model"),
                             names_sep = "_",
                             values_to = "value") ,
-      mapping = aes(x = value, fill = model)
+      mapping = ggplot2::aes(x = value, fill = model)
     )+
-      geom_histogram() +
-      facet_wrap(~n_indeps, scales = "free") +
-      theme_bw()+
-      xlab("Time elapsed (in seconds)") +
-      ylab("Count")
+      ggplot2::geom_histogram() +
+      ggplot2::facet_wrap(~n_indeps, scales = "free") +
+      ggplot2::theme_bw()+
+      ggplot2::xlab("Time elapsed (in seconds)") +
+      ggplot2::ylab("Count")
 
 
 

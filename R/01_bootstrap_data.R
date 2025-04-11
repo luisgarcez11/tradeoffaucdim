@@ -28,7 +28,7 @@ bootstrap_data <- function(data =  bananaquality[sample(1:nrow(bananaquality),
   }
 
   #check outcome variable
-  if(!all(data[,outcome] %in% c(0,1))){
+  if(!all(unlist(data[,outcome]) %in% c(0,1))){
     stop("outcome variable not in data")
   }
 
@@ -44,9 +44,9 @@ bootstrap_data <- function(data =  bananaquality[sample(1:nrow(bananaquality),
   for(i in 1:n_maximum_dim){
     bdata <- rsample::bootstraps(data,
                                  times = n_samples) %>%
-      mutate(n_indeps = i)
+      dplyr::mutate(n_indeps = i)
     b_data_final <- b_data_final %>%
-      bind_rows(bdata)
+      dplyr::bind_rows(bdata)
   }
 
   #independent vars

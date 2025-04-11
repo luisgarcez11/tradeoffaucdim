@@ -11,21 +11,34 @@ Authors@R: c(
   )
 Depends:
     dplyr,
-    stringr,
-    rsample,
-    pROC,
-    fastDummies,
-    ggplot2,
-    caret,
-    ez,
-    fuzzySim,
     R (>= 3.5)
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2
+Imports: 
+    magrittr,
+    purrr,
+    rsample,
+    stringr,
+    tibble, 
+    tidyr,
+     ROCR,
+     SuperLearner,
+     caret,
+     dplyr,
+     ez,
+     fastDummies,
+     fuzzySim,
+     ggplot2,
+     pROC,
+     purrr,
+     rsample,
+     stringr,
+     tibble,
+     tidyr

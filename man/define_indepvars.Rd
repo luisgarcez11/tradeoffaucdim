@@ -20,5 +20,5 @@ list
 Create a column with dependent variables
 }
 \examples{
-define_indepvars(obj)
+define_indepvars(obj1)
 }

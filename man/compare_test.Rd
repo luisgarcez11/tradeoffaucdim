@@ -16,5 +16,5 @@ list
 Comapare test
 }
 \examples{
-compare_test(obj)
+compare_test(obj5)
 }

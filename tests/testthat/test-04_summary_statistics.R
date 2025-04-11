@@ -1,15 +1,12 @@
 
 test_that("output", {
-  obj = bootstrap_data() %>%
-    define_indepvars() %>%
-    apply_model()
-  expect_no_error(summary_stats(obj))
-  expect_type(summary_stats(obj), type = "list")
-  expect_type(summary_stats(obj)$stepwise_process , type = "list")
-  expect_type(summary_stats(obj)$ordered_indep_vars , type = "character")
-  expect_type(summary_stats(obj)$bootstrap_data , type = "list")
-  expect_type(summary_stats(obj)$summary_stats , type = "list")
-  expect_type(summary_stats(obj)$models , type = "character")
+  expect_no_error(summary_stats(obj3))
+  expect_type(summary_stats(obj3), type = "list")
+  expect_type(summary_stats(obj3)$stepwise_process , type = "list")
+  expect_type(summary_stats(obj3)$ordered_indep_vars , type = "character")
+  expect_type(summary_stats(obj3)$bootstrap_data , type = "list")
+  expect_type(summary_stats(obj3)$summary_stats , type = "list")
+  expect_type(summary_stats(obj3)$models , type = "character")
 
 })
 

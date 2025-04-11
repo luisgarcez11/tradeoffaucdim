@@ -27,5 +27,5 @@ list
 Apply model and create column with fit
 }
 \examples{
-apply_model(obj)
+apply_model(obj2)
 }

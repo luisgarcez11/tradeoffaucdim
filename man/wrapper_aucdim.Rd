@@ -21,6 +21,3 @@ tibble
 \description{
 Wrap all pipeline
 }
-\examples{
-wrapper_aucdim(data, outcome, indep_vars)
-}
