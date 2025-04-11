@@ -42,3 +42,5 @@ Imports:
      stringr,
      tibble,
      tidyr
+URL: https://github.com/luisgarcez11/tradeoffaucdim
+BugReports: https://github.com/luisgarcez11/tradeoffaucdim/issues
