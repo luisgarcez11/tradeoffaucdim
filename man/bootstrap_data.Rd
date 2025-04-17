@@ -5,15 +5,16 @@
 \title{Bootstrap data}
 \usage{
 bootstrap_data(
-  data = bananaquality[sample(1:nrow(bananaquality), replace = FALSE, size = 200), ],
+  data,
   outcome = "Quality",
-  indep_vars = setdiff(names(bananaquality), outcome),
+  indep_vars = c("Size", "Weight", "Sweetness", "Softness", "HarvestTime", "Ripeness",
+    "Acidity"),
   n_samples = 50,
   n_maximum_dim = 5
 )
 }
 \arguments{
-\item{data}{a dataframe to be analysed}
+\item{data}{a dataframe to be analyzed}
 
 \item{outcome}{a string representing the outcome variable}
 
@@ -27,8 +28,10 @@ bootstrap_data(
 list
 }
 \description{
-Create a tibble with a number of bootstrap samples
+Create a list with bootstrap samples
 }
 \examples{
-bootstrap_data()
+data1 = bananaquality[sample(1:nrow(bananaquality),replace = FALSE,
+size = 200),]
+bootstrap_data(data1)
 }

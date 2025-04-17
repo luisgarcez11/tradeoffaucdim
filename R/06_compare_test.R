@@ -1,16 +1,20 @@
-#' Comapare test
+#' Compare test
 #'
-#' @param obj object returned by plot_curve
+#' Performs statistical tests to compare performance and runtime.
 #'
-#' @returns list
+#' @param obj object returned by \code{plot_curve}
+#' @param x_label_offset x coordinate to plot p-value
+#' @param y_label_offset y coordinate to plot p-value
+#'
+#' @returns list with statistical tests performed
 #' @export
 #'
 #' @examples
 #' compare_test(obj5)
-compare_test <- function(obj){
+compare_test <- function(obj, x_label_offset = 1, y_label_offset = 10){
 
   x <- y <- p_value <- auc <- id <- model <- time <-
-    n_indeps <- t_test <- diff_auc <- NULL
+    n_indeps <- t_test <- diff_auc <- diff_time <- . <-  NULL
 
   #test results
   if(length(obj$models)== 2){
@@ -30,7 +34,7 @@ compare_test <- function(obj){
       dplyr::mutate(p_value = purrr::map_dbl(.x = t_test,
                                        .f = function(.x) {
                                          .x$p.value})) %>%
-      dplyr::mutate(y = 10) %>%
+      dplyr::mutate(y = y_label_offset) %>%
       dplyr::mutate(weight = 1)
 
     #add global p_values
@@ -51,12 +55,12 @@ compare_test <- function(obj){
       mapping = ggplot2::aes(x = diff_auc)
     )+
       ggplot2::geom_histogram() +
-      ggplot2::facet_wrap(~n_indeps, scales = "free") +
+      ggplot2::facet_wrap(~n_indeps) +
       ggplot2::theme_bw()+
       ggplot2::geom_label(data = obj$test$perf_ttest %>%
-                   dplyr::mutate(x = 0),
+                   dplyr::mutate(x = x_label_offset),
                 ggplot2::aes(x, y,
-                    label = round(p_value, 5)), size = 3,
+                    label = round(p_value, 2)), size = 3,
                 position = "identity") +
       ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = 0), colour = "red",
                  linetype = 2) +
@@ -77,7 +81,7 @@ compare_test <- function(obj){
                                       .f = function(.x) {
                                         .x$p.value})) %>%
       dplyr::mutate(x = max(obj$bootstrap_data$diff_time),
-             y = 10) %>%
+             y = y_label_offset) %>%
       dplyr::mutate(weight = 1)
 
     #add global p_values
@@ -92,6 +96,24 @@ compare_test <- function(obj){
     obj$test$time_ttest <- obj$test$time_ttest %>%
       dplyr::mutate(global_p_value = 1 - stats::pnorm(weighted_z))
 
+    #add plot with differences
+    obj$test$plot_time_diff <- ggplot2::ggplot(
+      data = obj$bootstrap_data[,c("diff_time", "n_indeps")] ,
+      mapping = ggplot2::aes(x = diff_time)
+    )+
+      ggplot2::geom_histogram() +
+      ggplot2::facet_wrap(~n_indeps) +
+      ggplot2::theme_bw()+
+      ggplot2::geom_label(data = obj$test$time_ttest %>%
+                            dplyr::mutate(x = x_label_offset),
+                          ggplot2::aes(x, y,
+                                       label = round(p_value, 2)), size = 3,
+                          position = "identity") +
+      ggplot2::geom_vline(mapping = ggplot2::aes(xintercept = 0), colour = "red",
+                          linetype = 2) +
+      ggplot2::xlab("Computation Time Differences (s)") +
+      ggplot2::ylab("Count")
+
 
   return(obj)}
 
@@ -102,16 +124,23 @@ compare_test <- function(obj){
       tidyr::pivot_longer(cols = c(dplyr::starts_with(obj$perf_measure)),
                           names_to = c("measure", "model"),
                           names_sep = "_",
-                          values_to = obj$perf_measure)
+                          values_to = obj$perf_measure) %>%
+      dplyr::mutate_at(c("id", "model"), ~as.factor(.))
 
     #repeated measures ANOVA
-    obj$test$perf_anova <- ez::ezANOVA(data =  data,
+    obj$test$perf_anova <- suppressWarnings({ez::ezANOVA(data =  data,
                 dv = auc,
                 wid = id,
-                within = model
-                )
+                within = .(model),
+                return_aov = TRUE
+                )})
+    obj$test$perf_posthocs <- stats::pairwise.t.test(data$auc,
+                                              data$model,
+                                              p.adjust.method = "bonferroni",
+                                              paired = TRUE)
 
-    #prepare data for ANOVA
+
+    #prepare data for ANOVA#prepare data for ANOVAaov
     data = obj$bootstrap_data %>%
       tidyr::pivot_longer(cols = c(dplyr::starts_with("time")),
                           names_to = c("measure", "model"),
@@ -119,11 +148,18 @@ compare_test <- function(obj){
                           values_to = "time")
 
     #repeated measures ANOVA for time
-    obj$test$time_anova <- ez::ezANOVA(data =  data,
+    obj$test$time_anova <- suppressWarnings({ez::ezANOVA(data =  data,
                                        dv = time,
                                        wid = id,
-                                       within = model
-    )
+                                       within = .(model),
+                                       return_aov = TRUE
+    )})
+    obj$test$time_posthocs <- stats::pairwise.t.test(data$time,
+                                              data$model,
+                                              p.adjust.method = "bonferroni",
+                                              paired = TRUE)
+
+    return(obj)
 
   }
 

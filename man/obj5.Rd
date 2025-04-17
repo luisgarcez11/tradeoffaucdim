@@ -3,7 +3,7 @@
 \docType{data}
 \name{obj5}
 \alias{obj5}
-\title{Example Obj5}
+\title{Example Object returned from \code{plot_curve}}
 \format{
 An object of class \code{list} of length 16.
 }

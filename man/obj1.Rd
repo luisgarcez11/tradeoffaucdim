@@ -3,7 +3,7 @@
 \docType{data}
 \name{obj1}
 \alias{obj1}
-\title{Example Obj1}
+\title{Example Object returned from \code{bootstrap_data}}
 \format{
 An object of class \code{list} of length 5.
 }

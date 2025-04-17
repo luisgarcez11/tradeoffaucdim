@@ -1,10 +1,10 @@
 
 
-#' Define dep vars
+#' Define independent variables
 #'
-#' Create a column with dependent variables
+#' Define independent variables to be tested
 #'
-#' @param obj object returned by bootstrap_data
+#' @param obj object returned by \code{bootstrap_data}
 #' @param p_in entry p-value used to determine variable order
 #' @param p_out removal p-value used to determine variable order
 #'

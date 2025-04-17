@@ -4,10 +4,23 @@
 \alias{wrapper_aucdim}
 \title{Wrap all pipeline}
 \usage{
-wrapper_aucdim(data, outcome, indep_vars, ...)
+wrapper_aucdim(
+  data,
+  outcome,
+  indep_vars,
+  n_samples = 100,
+  n_maximum_dim = 5,
+  p_in = 0.5,
+  p_out = 0.6,
+  models = c("SL.glm"),
+  test_partition_prop = 0.2,
+  perf_measure = "auc",
+  x_label_offset = 1,
+  y_label_offset = 10
+)
 }
 \arguments{
-\item{data}{a dataframe to be analysed}
+\item{data}{a dataframe to be analyzed}
 
 \item{outcome}{a string representing the outcome variable}
 
@@ -16,7 +29,7 @@ wrapper_aucdim(data, outcome, indep_vars, ...)
 \item{...}{arguments used across pipeline}
 }
 \value{
-tibble
+a list with the final object
 }
 \description{
 Wrap all pipeline

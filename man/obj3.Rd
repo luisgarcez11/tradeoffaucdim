@@ -3,7 +3,7 @@
 \docType{data}
 \name{obj3}
 \alias{obj3}
-\title{Example Obj3}
+\title{Example Object returned from \code{apply_model}}
 \format{
 An object of class \code{list} of length 10.
 }

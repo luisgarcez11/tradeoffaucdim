@@ -9,4 +9,4 @@
 library(testthat)
 library(tradeoffaucdim)
 
-test_check("tradeoffaucdim")
+test_check("tradeoffaucdim" )

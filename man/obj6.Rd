@@ -3,7 +3,7 @@
 \docType{data}
 \name{obj6}
 \alias{obj6}
-\title{Example Obj6}
+\title{Example Object returned from \code{compare_test}}
 \format{
 An object of class \code{list} of length 17.
 }

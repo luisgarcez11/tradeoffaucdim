@@ -7,13 +7,13 @@
 plot_curve(obj)
 }
 \arguments{
-\item{obj}{object returned by 04_summary_statistics}
+\item{obj}{object returned by \code{summary_statistics}}
 }
 \value{
-list
+list with graphical features
 }
 \description{
-Plot curve
+Return plot features.
 }
 \examples{
 plot_curve(obj4)

@@ -1,17 +1,20 @@
 #' Summary Stats
 #'
-#' @param obj object returned by apply_model
+#' Return summary statistics
 #'
-#' @returns list
+#' @param obj object returned from  \code{apply_model}
+#'
+#' @returns list with summary statistics and bootstrap confidence intervals
 #' @export
 #'
 #' @examples
 #' summary_stats(obj3)
 summary_stats <- function(obj){
 
+  #initialize objects to NULL
   measure <- value <- n_indeps <- model <- auc <- time <- NULL
 
-  #bootstrap longer
+  #bootstrap longer format
   obj$bootstrap_data_longer <- obj$bootstrap_data %>%
     tidyr::pivot_longer(cols = c(dplyr::starts_with(obj$perf_measure),
                                  dplyr::starts_with("time_")),
@@ -32,6 +35,7 @@ summary_stats <- function(obj){
                 time_q975 = stats::quantile(time, 0.975)) %>%
       dplyr::ungroup()
 
+  #store data
   obj$bootstrap_data_longer <- NULL
 
   return(obj)

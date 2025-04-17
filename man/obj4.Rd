@@ -3,7 +3,7 @@
 \docType{data}
 \name{obj4}
 \alias{obj4}
-\title{Example Obj4}
+\title{Example Object returned from \code{summary_statistics}}
 \format{
 An object of class \code{list} of length 12.
 }

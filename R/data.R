@@ -3,32 +3,32 @@
 #' Banana quality dataset
 "bananaquality"
 
-#' Example Obj1
+#' Example Object returned from \code{bootstrap_data}
 #'
 #' obj1
 "obj1"
 
-#' Example Obj2
+#' Example Object returned from \code{define_indepvars_outcome}
 #'
 #' obj2
 "obj2"
 
-#' Example Obj3
+#' Example Object returned from \code{apply_model}
 #'
 #' obj3
 "obj3"
 
-#' Example Obj4
+#' Example Object returned from \code{summary_statistics}
 #'
 #' obj4
 "obj4"
 
-#' Example Obj5
+#' Example Object returned from \code{plot_curve}
 #'
 #' obj5
 "obj5"
 
-#' Example Obj6
+#' Example Object returned from \code{compare_test}
 #'
 #' obj6
 "obj6"

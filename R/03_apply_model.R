@@ -4,31 +4,35 @@
 #'
 #' Apply model and create column with fit
 #'
-#' @param obj object returned from 02_define_depvars_outcome
+#' @param obj object returned from \code{define_indepvars_outcome}
 #' @param models models to be analyzed
 #' @param test_partition_prop test proportion
 #' @param perf_measure performance measure
 #'
-#' @returns list
+#' @returns list with fit models and parameters
 #' @export
+#'
+#' @importFrom dplyr mutate select
+#' @importFrom SuperLearner All
 #'
 #' @examples
 #' apply_model(obj2)
+#'
 apply_model <- function(obj,
-                        models = c("SL.glm", "SL.svm"),
+                        models = c("SL.glm", "SL.rpart"),
                         test_partition_prop = 0.2,
                         perf_measure = "auc"){
 
+  #initialize objects to NULL
   splits <- indep_vars <- train_test_data <- fit <- model_fit <- newY <-
     performance <- time <- X <- Y <- newX <- . <-  NULL
 
+  #assign arguments to final object
   obj$models <- models
   obj$test_partition_prop <- test_partition_prop
   obj$perf_measure = perf_measure
-  #check if package is installed
-  # if (stringr::str_remove(model, "SL.") %in% rownames(installed.packages())) {
-  #   print(paste(package_name, "is installed."))
 
+  #if there are specified models
   if(!is.null(obj$models)){
 
     #store train and outcome data
@@ -38,20 +42,20 @@ apply_model <- function(obj,
                                      .f = function(.x, .y){
                                        trainIndex <- caret::createDataPartition(
                                          y = unlist(
-                                           as.data.frame(.x)[obj$outcome]),
+                                           rsample::analysis(.x)[obj$outcome]),
                                          p = 1-test_partition_prop,
                                          list = FALSE,
                                          times = 1)
-                                       df = as.data.frame(.x)
-                                       list(
+                                       df = rsample::analysis(.x)
+                                       return(list(
                                          X = df[trainIndex,][.y] ,
                                          newX = df[-trainIndex,][.y],
                                          Y =  df[trainIndex, obj$outcome],
                                          newY =  df[-trainIndex, obj$outcome]
-                                         )}
+                                         ))}
                                      )) %>%
       tidyr::unnest_wider(train_test_data) %>%
-      select(-splits)
+      dplyr::select(-splits)
 
 
     #iterate over models to store AUC
@@ -94,9 +98,10 @@ apply_model <- function(obj,
     }
     }
 
-  #compute performance differences
+  #when only 2 models being compared
   if(length(obj$models) == 2){
-    #calculate AUC differences
+
+    #calculate AUC and runtime differences
     obj$bootstrap_data <- obj$bootstrap_data %>%
       dplyr::mutate(diff_performance = obj$bootstrap_data[[paste0("performance_",
                                                            obj$models[2])]] -
@@ -107,7 +112,7 @@ apply_model <- function(obj,
                obj$bootstrap_data[[paste0("time_",
                                           obj$models[1])]])}
 
-  #save space
+  #save space by removing info
   obj$bootstrap_data <- obj$bootstrap_data %>%
     dplyr::select(-c(model_fit, X, Y,
               newX, newY))%>%

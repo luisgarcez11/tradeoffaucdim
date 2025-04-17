@@ -3,7 +3,7 @@
 \docType{data}
 \name{obj2}
 \alias{obj2}
-\title{Example Obj2}
+\title{Example Object returned from \code{define_indepvars_outcome}}
 \format{
 An object of class \code{list} of length 7.
 }

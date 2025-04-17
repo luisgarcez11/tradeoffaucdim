@@ -1,9 +1,9 @@
 
 #' Bootstrap data
 #'
-#' Create a tibble with a number of bootstrap samples
+#' Create a list with bootstrap samples
 #'
-#' @param data a dataframe to be analysed
+#' @param data a dataframe to be analyzed
 #' @param outcome a string representing the outcome variable
 #' @param indep_vars a vector of strings to be considered
 #' @param n_samples number of bootstrap samples
@@ -13,14 +13,17 @@
 #' @export
 #'
 #' @examples
-#' bootstrap_data()
-bootstrap_data <- function(data =  bananaquality[sample(1:nrow(bananaquality),
-                                                        replace = FALSE,
-                                                        size = 200),],
+#' data1 = bananaquality[sample(1:nrow(bananaquality),replace = FALSE,
+#' size = 200),]
+#' bootstrap_data(data1)
+bootstrap_data <- function(data,
                            outcome = "Quality",
-                           indep_vars = setdiff(names(bananaquality), outcome),
+                           indep_vars = c("Size", "Weight", "Sweetness",
+                                          "Softness", "HarvestTime",
+                                          "Ripeness", "Acidity"  ),
                            n_samples = 50,
                            n_maximum_dim = 5){
+
 
   #check outcome variable
   if(!outcome %in% names(data)){

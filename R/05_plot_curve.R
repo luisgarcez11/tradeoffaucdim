@@ -1,28 +1,33 @@
 #' Plot curve
 #'
-#' @param obj object returned by 04_summary_statistics
+#' Return plot features.
 #'
-#' @returns list
+#' @param obj object returned by \code{summary_statistics}
+#'
+#' @returns list with graphical features
 #' @export
 #'
 #' @examples
 #' plot_curve(obj4)
 plot_curve <- function(obj){
 
+  #initialize objects to NULL
   n_indeps <- perf_m <- model <- auc <- perf_q025 <-
     perf_q975 <- time_m <- time_q025 <-time_q975 <- value <- NULL
 
     #plot performance
     obj$plot_performance <- ggplot2::ggplot(data = obj$summary_stats )+
-      ggplot2::geom_line(ggplot2::aes( x = n_indeps, y = perf_m, colour = model ))+
+      ggplot2::geom_line(
+        ggplot2::aes( x = n_indeps, y = perf_m, colour = model ))+
       ggplot2::geom_errorbar(ggplot2::aes( x = n_indeps, y = perf_m,
                          ymin = perf_q025, ymax= perf_q975,
                         colour = model),
                     width=.2, linetype = 1) +
       ggplot2::xlab("Dimensionality") +
       ggplot2::ylab(toupper(obj$perf_measure[1])) +
-      ggplot2::labs(caption = paste0("Variable order: ",paste0(obj$ordered_indep_vars,
-                                           collapse = ", ")))+
+      ggplot2::labs(caption = paste0("Variable order: ",
+                                     paste0(obj$ordered_indep_vars,
+                                            collapse = ", ")))+
       ggplot2::theme_bw()
 
     #add plot histogram
@@ -74,10 +79,5 @@ plot_curve <- function(obj){
       ggplot2::xlab("Time elapsed (in seconds)") +
       ggplot2::ylab("Count")
 
-
-
-
   return(obj)
-
-
 }

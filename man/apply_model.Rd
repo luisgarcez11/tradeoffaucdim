@@ -6,13 +6,13 @@
 \usage{
 apply_model(
   obj,
-  models = c("SL.glm", "SL.svm"),
+  models = c("SL.glm", "SL.rpart"),
   test_partition_prop = 0.2,
   perf_measure = "auc"
 )
 }
 \arguments{
-\item{obj}{object returned from 02_define_depvars_outcome}
+\item{obj}{object returned from \code{define_indepvars_outcome}}
 
 \item{models}{models to be analyzed}
 
@@ -21,11 +21,12 @@ apply_model(
 \item{perf_measure}{performance measure}
 }
 \value{
-list
+list with fit models and parameters
 }
 \description{
 Apply model and create column with fit
 }
 \examples{
 apply_model(obj2)
+
 }

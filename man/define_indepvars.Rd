@@ -2,12 +2,12 @@
 % Please edit documentation in R/02_define_depvars_outcome.R
 \name{define_indepvars}
 \alias{define_indepvars}
-\title{Define dep vars}
+\title{Define independent variables}
 \usage{
 define_indepvars(obj, p_in = 0.5, p_out = 0.6)
 }
 \arguments{
-\item{obj}{object returned by bootstrap_data}
+\item{obj}{object returned by \code{bootstrap_data}}
 
 \item{p_in}{entry p-value used to determine variable order}
 
@@ -17,7 +17,7 @@ define_indepvars(obj, p_in = 0.5, p_out = 0.6)
 list
 }
 \description{
-Create a column with dependent variables
+Define independent variables to be tested
 }
 \examples{
 define_indepvars(obj1)

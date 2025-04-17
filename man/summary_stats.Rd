@@ -7,13 +7,13 @@
 summary_stats(obj)
 }
 \arguments{
-\item{obj}{object returned by apply_model}
+\item{obj}{object returned from  \code{apply_model}}
 }
 \value{
-list
+list with summary statistics and bootstrap confidence intervals
 }
 \description{
-Summary Stats
+Return summary statistics
 }
 \examples{
 summary_stats(obj3)

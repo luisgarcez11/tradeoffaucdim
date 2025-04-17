@@ -1,7 +1,7 @@
 
 
 test_that("output", {
-  obj <- suppressWarnings({apply_model(obj2)})
+  obj <- suppressMessages({apply_model(obj2)})
   expect_no_error(obj)
   expect_type(obj, type = "list")
   expect_type(obj$stepwise_process , type = "list")
