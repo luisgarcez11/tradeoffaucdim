@@ -26,7 +26,23 @@ wrapper_aucdim(
 
 \item{indep_vars}{a vector of strings to be considered}
 
-\item{...}{arguments used across pipeline}
+\item{n_samples}{number of bootstrap samples}
+
+\item{n_maximum_dim}{maximum number of variables}
+
+\item{p_in}{entry p-value for choosing variable order}
+
+\item{p_out}{exclusion p-value for choosing variable order}
+
+\item{models}{a string representing the models to compare}
+
+\item{test_partition_prop}{test partition proportion}
+
+\item{perf_measure}{performance measure to be considered}
+
+\item{x_label_offset}{x coordinate for plotting}
+
+\item{y_label_offset}{y coordinate for plotting}
 }
 \value{
 a list with the final object

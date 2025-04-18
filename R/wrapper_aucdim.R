@@ -5,7 +5,16 @@
 #' @param data a dataframe to be analyzed
 #' @param outcome a string representing the outcome variable
 #' @param indep_vars a vector of strings to be considered
-#' @param ... arguments used across pipeline
+#' @param n_samples number of bootstrap samples
+#' @param n_maximum_dim maximum number of variables
+#' @param p_in entry p-value for choosing variable order
+#' @param p_out exclusion p-value for choosing variable order
+#' @param models a string representing the models to compare
+#' @param test_partition_prop test partition proportion
+#' @param perf_measure performance measure to be considered
+#' @param x_label_offset x coordinate for plotting
+#' @param y_label_offset y coordinate for plotting
+#'
 #'
 #' @returns a list with the final object
 #' @export
