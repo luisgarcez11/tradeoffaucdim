@@ -1,6 +1,6 @@
 Package: tradeoffaucdim
 Type: Package
-Title: Plotting Trade-Off AUC-dimensionality
+Title: Plotting Trade-Off AUC-Dimensionality
 Version: 0.1.0
 Authors@R: c(
     person(
