@@ -14,11 +14,15 @@ hey = tradeoffaucdim::wrapper_aucdim(data = tradeoffaucdim::bananaquality[1:200,
                                model = "SL.glm")
 save(hey, file = "hey.Rdata")
 
-obj1 <- bootstrap_data(data = tradeoffaucdim::bananaquality[sample(1:nrow(bananaquality), size = 50),],
+
+bananaquality_sample <- tradeoffaucdim::bananaquality[sample(1:nrow(bananaquality), size = 50),]
+usethis::use_data(bananaquality_sample)
+obj1 <- bootstrap_data(data = bananaquality_sample,
                        outcome = "Quality",
                        indep_vars = setdiff(names(bananaquality), "Quality"),
                        n_samples = 30,
-                       n_maximum_dim = 5)
+                       n_maximum_dim = 3)
+
 usethis::use_data(obj1, overwrite = TRUE)
 obj2 <- define_indepvars(obj1)
 usethis::use_data(obj2, overwrite = TRUE)

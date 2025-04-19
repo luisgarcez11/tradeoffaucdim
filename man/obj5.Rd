@@ -5,7 +5,7 @@
 \alias{obj5}
 \title{Example Object returned from \code{plot_curve}}
 \format{
-An object of class \code{list} of length 16.
+An object of class \code{list} of length 15.
 }
 \usage{
 obj5

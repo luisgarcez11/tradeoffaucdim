@@ -5,7 +5,7 @@
 \alias{obj6}
 \title{Example Object returned from \code{compare_test}}
 \format{
-An object of class \code{list} of length 17.
+An object of class \code{list} of length 16.
 }
 \usage{
 obj6

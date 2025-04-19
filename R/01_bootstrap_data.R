@@ -13,9 +13,7 @@
 #' @export
 #'
 #' @examples
-#' data1 = bananaquality[sample(1:nrow(bananaquality),replace = FALSE,
-#' size = 200),]
-#' bootstrap_data(data1)
+#' bootstrap_data(bananaquality_sample)
 bootstrap_data <- function(data,
                            outcome = "Quality",
                            indep_vars = c("Size", "Weight", "Sweetness",

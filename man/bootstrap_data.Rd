@@ -31,7 +31,5 @@ list
 Create a list with bootstrap samples
 }
 \examples{
-data1 = bananaquality[sample(1:nrow(bananaquality),replace = FALSE,
-size = 200),]
-bootstrap_data(data1)
+bootstrap_data(bananaquality_sample)
 }

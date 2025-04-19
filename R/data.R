@@ -3,6 +3,11 @@
 #' Banana quality dataset
 "bananaquality"
 
+#' Banana Quality Subset
+#'
+#' Banana quality dataset subset
+"bananaquality_sample"
+
 #' Example Object returned from \code{bootstrap_data}
 #'
 #' obj1
