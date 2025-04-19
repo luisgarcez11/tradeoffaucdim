@@ -8,6 +8,7 @@ test_that("output", {
 
 
   obj_v2 <- suppressMessages({apply_model(obj2,
+                                          test_partition_prop = 0.5,
                                           models = c("SL.glm", "SL.speedglm",
                                                      "SL.rpart"))}) %>%
     summary_stats() %>%
@@ -17,6 +18,7 @@ test_that("output", {
   expect_type(suppressWarnings(compare_test(obj_v2)), type = "list")
 
   obj_v3 <- suppressMessages({apply_model(obj2,
+                                          test_partition_prop = 0.5,
                                           models = c("SL.glm"))}) %>%
     summary_stats() %>%
     plot_curve()
