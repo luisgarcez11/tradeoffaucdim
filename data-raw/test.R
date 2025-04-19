@@ -6,7 +6,7 @@ library(tradeoffaucdim,
         lib.loc = "C:/Users/luis_/OneDrive - Universidade de Lisboa/Luís Garcez/00_packages/")
 
 
-hey = tradeoffaucdim::wrapper_aucdim(data = tradeoffaucdim::bananaquality,
+hey = tradeoffaucdim::wrapper_aucdim(data = tradeoffaucdim::bananaquality[1:200,],
                                outcome = "Quality",
                                indep_vars = setdiff(names(bananaquality), "Quality"),
                                n_samples = 30,
@@ -14,7 +14,7 @@ hey = tradeoffaucdim::wrapper_aucdim(data = tradeoffaucdim::bananaquality,
                                model = "SL.glm")
 save(hey, file = "hey.Rdata")
 
-obj1 <- bootstrap_data(data = tradeoffaucdim::bananaquality,
+obj1 <- bootstrap_data(data = tradeoffaucdim::bananaquality[sample(1:nrow(bananaquality), size = 50),],
                        outcome = "Quality",
                        indep_vars = setdiff(names(bananaquality), "Quality"),
                        n_samples = 30,
