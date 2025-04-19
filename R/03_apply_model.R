@@ -16,7 +16,7 @@
 #' @importFrom SuperLearner All
 #'
 #' @examples
-#' apply_model(obj2, models = "SL.glm")
+#' apply_model(obj2, models = "SL.glm", test_partition_prop = 0.5 )
 #'
 apply_model <- function(obj,
                         models = c("SL.glm", "SL.rpart"),
