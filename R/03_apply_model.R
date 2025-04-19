@@ -16,7 +16,7 @@
 #' @importFrom SuperLearner All
 #'
 #' @examples
-#' apply_model(obj2)
+#' apply_model(obj2, models = "SL.glm")
 #'
 apply_model <- function(obj,
                         models = c("SL.glm", "SL.rpart"),
