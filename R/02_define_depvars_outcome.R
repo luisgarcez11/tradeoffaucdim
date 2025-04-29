@@ -8,7 +8,10 @@
 #' @param p_in entry p-value used to determine variable order
 #' @param p_out removal p-value used to determine variable order
 #'
-#' @returns list
+#' @returns list with bootstrap samples, original data, string representing
+#' the independent variables, the outcome variable, an integer representing
+#' the maximum number of dimensions and a string representing the order of which
+#' variables are compared.
 #' @export
 #'
 #' @examples

@@ -4,7 +4,11 @@
 #'
 #' @param obj object returned from  \code{apply_model}
 #'
-#' @returns list with summary statistics and bootstrap confidence intervals
+#' @returns list with bootstrap samples with a model fit for each sample,
+#' original data, string representing the independent variables, the outcome
+#' variable, an integer representing the maximum number of dimensions, a string
+#' representing the order of which variables are compared. Also, a tibble
+#' summarizing the parameter statistics quantiles.
 #' @export
 #'
 #' @examples

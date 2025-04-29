@@ -20,8 +20,8 @@ usethis::use_data(bananaquality_sample)
 obj1 <- bootstrap_data(data = bananaquality_sample,
                        outcome = "Quality",
                        indep_vars = setdiff(names(bananaquality), "Quality"),
-                       n_samples = 10,
-                       n_maximum_dim = 3)
+                       n_samples = 8,
+                       n_maximum_dim = 2)
 
 usethis::use_data(obj1, overwrite = TRUE)
 obj2 <- define_indepvars(obj1)

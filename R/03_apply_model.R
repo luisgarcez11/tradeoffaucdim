@@ -9,7 +9,10 @@
 #' @param test_partition_prop test proportion
 #' @param perf_measure performance measure
 #'
-#' @returns list with fit models and parameters
+#' @returns list with bootstrap samples with a model fit for each sample,
+#' original data, string representing the independent variables, the outcome
+#' variable, an integer representing the maximum number of dimensions, a string
+#' representing the order of which variables are compared.
 #' @export
 #'
 #' @importFrom dplyr mutate select

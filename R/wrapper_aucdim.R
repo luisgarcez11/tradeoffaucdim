@@ -16,7 +16,7 @@
 #' @param y_label_offset y coordinate for plotting
 #'
 #'
-#' @returns a list with the final object
+#' @returns a list with the final object.
 #' @export
 wrapper_aucdim <- function(data, outcome, indep_vars,
                            n_samples = 100, n_maximum_dim = 5,

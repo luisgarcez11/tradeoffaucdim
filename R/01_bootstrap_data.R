@@ -9,7 +9,9 @@
 #' @param n_samples number of bootstrap samples
 #' @param n_maximum_dim maximum number of variables to be considered
 #'
-#' @returns list
+#' @returns list with bootstrap samples, original data, string representing
+#' the independent variables, the outcome variable and an integer representing
+#' the maximum number of dimensions.
 #' @export
 #'
 #' @examples
